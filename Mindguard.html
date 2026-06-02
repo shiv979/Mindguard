@@ -1,0 +1,551 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>MindGuard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Manrope',sans-serif;
+}
+
+body{
+  height:100vh;
+  overflow:hidden;
+  background-image:url("back.jpeg");
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+}
+.questions-box {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 30px 48px;
+  margin: 16px 0;
+  max-width: 650px;
+  width: 100%;
+}
+
+.question {
+  font-size: 19px;
+  margin: 12px 0;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+/* ---------- SECTIONS ---------- */
+section{
+  width:100%;
+  height:100vh;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  text-align:center;
+  padding:60px;
+  position:relative;
+}
+
+section.active{display:flex;}
+
+/* ---------- VIDEO ---------- */
+.video-bg video{
+  position:absolute;
+  top:0;left:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  opacity:.25;
+  z-index:-1;
+}
+
+/* ---------- TEXT ---------- */
+h1{
+  font-family:Monotype Corsiva;
+  font-size:95px;
+  color:#216a59;
+}
+
+.glow {
+  color: rgb(255, 255, 255);
+  font-size: 80px;
+  text-shadow: 0 0 10px rgb(251, 228, 179); 
+}
+
+.glow3{
+  font-family: monotype corsiva;
+  font-size: 50px;
+  color: #3cbe6a;
+  text-shadow: 0 0 10px #ffffff; 
+}
+
+h2{
+  font-family: monotype corsiva;
+  font-size:34px;
+  color:#f9861a;
+}
+
+.glow2 {
+    font-family: monotype corsiva;
+  color: #f9861a;
+  font-size: 50px;
+  text-shadow: 0 0 10px #ffffff; 
+}
+
+.glow4{
+  font-family: monotype corsiva;
+  font-size: 50px;
+  color: #63ae4d;
+  text-shadow: 0 0 10px #ffffff; 
+}
+
+/* RESULT GLOW STYLE */
+.result-glow{
+  color:#216a59;
+  text-shadow:
+    0 0 8px #fff,
+    0 0 20px #fff,
+    0 0 35px #fff;
+}
+
+p{
+  font-size:22px;
+  max-width:800px;
+  margin-top:18px;
+  color:#000000;
+  line-height:1.6;
+}
+
+/* ---------- BUTTON ---------- */
+button{
+  font-family: monotype corsiva;
+  padding:25px 50px;
+  border-radius:47px;
+  border:none;
+  background:#63ae4d;
+  color:white;
+  font-size:30px;
+  cursor:pointer;
+  margin:20px;
+  transition:.2s;
+}
+
+button:hover{
+  transform:scale(1.05);
+  box-shadow:0 15px 30px rgba(0,0,0,.2);
+}
+
+/* RESULT BUTTONS HORIZONTAL */
+#result .result-buttons{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:25px;
+  margin-top:30px;
+  flex-wrap:wrap;
+}
+
+/* ---------- BREATHING ---------- */
+.circle{
+  width:260px;
+  height:260px;
+  border-radius:50%;
+  margin:40px 0;
+  background:radial-gradient(circle at top, #fbd26a, #ffffff);
+  box-shadow:0 0 100px #fff7e4;
+  animation:breathe 7s ease-in-out infinite;
+}
+
+@keyframes breathe{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.35);}
+  100%{transform:scale(1);}
+}
+
+/* ---------- QUESTIONS ---------- */
+.question{font-size:22px;margin:16px 0;}
+
+/* ---------- COPING BOX ---------- */
+.coping-box{
+  background:#ffffff;
+  padding:50px;
+  border-radius:24px;
+  margin-top:30px;
+  max-width:780px;
+}
+
+/* ---------- CONFETTI ---------- */
+.confetti{
+  position:absolute;
+  width:8px;
+  height:8px;
+  background:#7fb8a6;
+  animation:fall 2s linear forwards;
+}
+
+@keyframes fall{
+  from{transform:translateY(-10vh);}
+  to{transform:translateY(110vh);}
+}
+
+/* ---------- RESOURCES BUBBLES ---------- */
+#resources .bubble-left,
+#resources .bubble-right{
+  position:absolute;
+  pointer-events:none;
+}
+
+#resources .bubble-left{bottom:0;left:0;width:200px;height:100%;}
+#resources .bubble-right{top:0;right:0;width:200px;height:100%;}
+
+#resources span{
+  position:absolute;
+  border-radius:50%;
+  background:rgba(127,184,166,.35);
+  animation:rise 12s infinite ease-in;
+}
+
+@keyframes rise{
+  0%{transform:translateY(100vh);opacity:.6;}
+  100%{transform:translateY(-20vh);opacity:0;}
+}
+
+
+#bubble {
+  background: #c8e6c2;
+  overflow: hidden;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.bubble-header {
+  position: absolute;
+  top: 36px; left: 0; width: 100%;
+  text-align: center;
+  z-index: 15;
+  pointer-events: none;
+}
+
+.bubble-header h2 {
+  font-family: monotype corsiva;
+  font-size: 48px;
+  color: #2d6b35;
+  text-shadow: none;
+  margin-bottom: 6px;
+}
+
+.bubble-header p {
+  font-family: monotype corsiva;
+  font-size: 22px;
+  color: #3a5c35;
+  margin: 0;
+}
+
+#bubbleCanvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  cursor: crosshair;
+  z-index: 1;
+}
+
+.bubble-pop-msg {
+  position: absolute;
+  font-size: 24px;
+  pointer-events: none;
+  z-index: 20;
+  animation: popMsg 1s ease-out forwards;
+}
+
+@keyframes popMsg {
+  0%   { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-70px) scale(1.5); }
+}
+
+.back-btn {
+  position: absolute;
+  bottom: 28px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  font-family: monotype corsiva;
+  font-size: 26px;
+  padding: 18px 42px;
+  background: #63ae4d;
+  border: none;
+  color: white;
+  border-radius: 47px;
+  cursor: pointer;
+  margin: 0;
+  box-shadow: 0 4px 20px rgba(99,174,77,0.4);
+}
+
+.back-btn:hover {
+  background: #4e9a3a;
+  transform: translateX(-50%) scale(1.05);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+</style>
+</head>
+
+<body>
+
+<!-- HOME -->
+<section id="home" class="active">
+<h1 class="glow">MindGuard</h1>
+<p>This is a calm space for you.You do not need to fix anything.<br>Just pause for a moment.</p>
+<button onclick="goTo('calm')">Begin</button>
+</section>
+
+<!-- CALM -->
+<section id="calm">
+<h2 class="glow2"><b>Follow the movement</b></h2>
+<div class="circle"></div>
+<p>Inhale as the circle expands.<br>Exhale as it softens.</p>
+<button onclick="goTo('check')">Continue</button>
+</section>
+
+<!-- CHECK -->
+<section id="check" class="video-bg">
+<video autoplay muted loop>
+<source src="https://cdn.coverr.co/videos/coverr-hugging-at-sunset-1903/1080p.mp4" type="video/mp4">
+</video>
+
+<h2 class="glow3">Check in with yourself</h2>
+
+<div class="questions-box">
+  <div class="question"><input type="radio" name="state" value="heart"> <b>Is your heartbeat faster than usual?</b></div>
+  <div class="question"><input type="radio" name="state" value="restless"> <b>Do you feel restless or uneasy right now?</b></div>
+  <div class="question"><input type="radio" name="state" value="thoughts"> <b>Are your thoughts racing or hard to slow down?</b></div>
+  <div class="question"><input type="radio" name="state" value="fear"> <b>Do you feel a sense of fear or discomfort?</b></div>
+</div>
+
+<button onclick="showResult()">See how you are doing</button>
+</section>
+
+<!-- RESULT -->
+<section id="result">
+<h2 id="resultTitle" class="result-glow"></h2>
+<p id="resultText" class="result-glow"></p>
+<div class="coping-box result-glow" id="copingBox"></div>
+
+<p style="margin-top:20px;">You showed up for yourself. That matters.</p>
+
+<div class="result-buttons">
+  <button style="width:200px;height:100px;" onclick="goTo('resources')">Mindful exercises</button>
+  <button style="width:200px;height:100px;" onclick="goTo('bubble')">Bubble release</button>
+  <button style="width:200px;height:100px;" onclick="goTo('home')">Go back home</button>
+</div>
+
+</section>
+<section id="resources">
+
+<div class="bubble-left">
+<span style="left:20px;width:20px;height:20px;"></span>
+<span style="left:60px;width:30px;height:30px;"></span>
+</div>
+
+<div class="bubble-right">
+<span style="right:20px;width:25px;height:25px;"></span>
+<span style="right:70px;width:18px;height:18px;"></span>
+</div>
+
+<h2 class="glow4">Mindful exercises</h2>
+<p>Here are gentle guided practices.</p>
+
+<p>🌿 <a href="https://www.youtube.com/watch?v=inpok4MKVLM" target="_blank">Guided breathing</a></p>
+<p>🌊 <a href="https://www.youtube.com/watch?v=ZToicYcHIOU" target="_blank">Grounding meditation</a></p>
+
+<button onclick="goTo('home')">Return home</button>
+</section>
+<div id="bubble">
+  <div class="bubble-header">
+    <h2>Pop your worries away</h2>
+    
+  </div>
+  <canvas id="bubbleCanvas"></canvas>
+  <button class="back-btn" onclick="stopBubbleGame()">← Back to home</button>
+</div>
+
+<script>
+function goTo(id){
+document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+}
+
+function showResult(){
+let choice=document.querySelector('input[name="state"]:checked');
+if(!choice) return;
+
+goTo("result");
+
+if(choice.value==="heart"){
+resultTitle.innerText="Your body feels activated";
+resultText.innerText="Stress is showing physically.";
+copingBox.innerText="Take three slow breaths. Longer exhale.";
+}
+else if(choice.value==="restless"){
+resultTitle.innerText="Your energy feels unsettled";
+resultText.innerText="That is manageable.";
+copingBox.innerText="Press feet into ground. Notice surroundings.";
+}
+else if(choice.value==="thoughts"){
+resultTitle.innerText="Your mind is moving fast";
+resultText.innerText="Racing thoughts will slow.";
+copingBox.innerText="Inhale 4 sec. Exhale 6 sec.";
+}
+else if(choice.value==="fear"){
+resultTitle.innerText="This feels uncomfortable";
+resultText.innerText="You are safe right now.";
+copingBox.innerText="Notice something solid near you.";
+}
+}
+let bubbles = [], animFrameId = null, spawnTimer = null;
+let canvas, ctx;
+
+const COLORS = [
+  ["rgba(99,174,77,0.45)",  "rgba(99,174,77,0.08)"],
+  ["rgba(251,210,106,0.50)","rgba(251,210,106,0.08)"],
+  ["rgba(249,134,26,0.38)", "rgba(249,134,26,0.06)"],
+  ["rgba(33,106,89,0.40)",  "rgba(33,106,89,0.08)"],
+  ["rgba(255,255,255,0.55)","rgba(255,255,255,0.10)"],
+  ["rgba(200,230,180,0.55)","rgba(200,230,180,0.10)"],
+];
+const EMOJIS = ["✨","💙","🌊","🕊️","🌿","☁️","🌸","💫","🌟","·"];
+
+function Bubble() {
+  this.r     = 30 + Math.random() * 62;
+  this.x     = this.r + Math.random() * (canvas.width - this.r * 2);
+  this.y     = canvas.height + this.r + Math.random() * 220;
+  this.speed = 0.5 + Math.random() * 1.1;
+  this.drift = (Math.random() - 0.5) * 0.6;
+  this.wobble      = Math.random() * Math.PI * 2;
+  this.wobbleSpeed = 0.018 + Math.random() * 0.02;
+  this.alpha  = 0.65 + Math.random() * 0.3;
+  this.colors = COLORS[Math.floor(Math.random() * COLORS.length)];
+  this.popped = false;
+  this.popP   = 0;
+}
+
+Bubble.prototype.update = function() {
+  if (this.popped) { this.popP += 0.07; return; }
+  this.wobble += this.wobbleSpeed;
+  this.x += this.drift + Math.sin(this.wobble) * 0.4;
+  this.y -= this.speed;
+};
+
+Bubble.prototype.draw = function() {
+  if (this.popped) {
+    let p = this.popP;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, p * this.r * 2.8, 0, Math.PI * 2);
+    ctx.strokeStyle = `rgba(255,255,255,${Math.max(0, 0.7 - p)})`;
+    ctx.lineWidth = 2.5; ctx.stroke();
+    for (let i = 0; i < 8; i++) {
+      let a = (i / 8) * Math.PI * 2, d = p * this.r * 2;
+      ctx.beginPath();
+      ctx.arc(this.x + Math.cos(a)*d, this.y + Math.sin(a)*d, Math.max(0, 3 - p*3.5), 0, Math.PI*2);
+      ctx.fillStyle = `rgba(255,255,255,${Math.max(0, 1 - p)})`; ctx.fill();
+    }
+    return;
+  }
+  ctx.save();
+  ctx.globalAlpha = this.alpha;
+  let g = ctx.createRadialGradient(
+    this.x - this.r*0.3, this.y - this.r*0.3, this.r*0.04,
+    this.x, this.y, this.r
+  );
+  g.addColorStop(0, "rgba(255,255,255,0.55)");
+  g.addColorStop(0.38, this.colors[0]);
+  g.addColorStop(1,    this.colors[1]);
+  ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI*2);
+  ctx.fillStyle = g; ctx.fill();
+  ctx.strokeStyle = "rgba(255,255,255,0.36)"; ctx.lineWidth = 1.2; ctx.stroke();
+  ctx.beginPath();
+  ctx.ellipse(this.x - this.r*0.27, this.y - this.r*0.27, this.r*0.2, this.r*0.11, -Math.PI/4, 0, Math.PI*2);
+  ctx.fillStyle = "rgba(255,255,255,0.5)"; ctx.fill();
+  ctx.restore();
+};
+
+Bubble.prototype.hit = function(mx, my) {
+  let dx = mx - this.x, dy = my - this.y;
+  return Math.sqrt(dx*dx + dy*dy) <= this.r;
+};
+
+function showPopMsg(x, y) {
+  const container = document.getElementById("bubble");
+  const d = document.createElement("div");
+  d.className = "bubble-pop-msg";
+  d.style.left = (x - 12) + "px";
+  d.style.top  = (y - 12) + "px";
+  d.textContent = EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
+  container.appendChild(d);
+  setTimeout(() => d.remove(), 1050);
+}
+
+function gameLoop() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  bubbles = bubbles.filter(b => b.popped ? b.popP < 1 : b.y + b.r > -50);
+  bubbles.forEach(b => { b.update(); b.draw(); });
+  animFrameId = requestAnimationFrame(gameLoop);
+}
+
+function onCanvasClick(e) {
+  let r = canvas.getBoundingClientRect();
+  let mx = e.clientX - r.left, my = e.clientY - r.top;
+  for (let i = bubbles.length - 1; i >= 0; i--) {
+    if (!bubbles[i].popped && bubbles[i].hit(mx, my)) {
+      bubbles[i].popped = true;
+      showPopMsg(mx, my);
+      break;
+    }
+  }
+}
+
+function resizeCanvas() {
+  canvas.width  = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+}
+
+// Call this to START the game
+function startBubbleGame() {
+  canvas = document.getElementById("bubbleCanvas");
+  ctx    = canvas.getContext("2d");
+  resizeCanvas();
+  bubbles = [];
+  for (let i = 0; i < 16; i++) {
+    let b = new Bubble();
+    b.y = Math.random() * canvas.height;
+    bubbles.push(b);
+  }
+  canvas.addEventListener("click", onCanvasClick);
+  window.addEventListener("resize", resizeCanvas);
+  spawnTimer  = setInterval(() => { if (bubbles.length < 24) bubbles.push(new Bubble()); }, 1500);
+  animFrameId = requestAnimationFrame(gameLoop);
+}
+
+// Call this to STOP the game
+function stopBubbleGame() {
+  cancelAnimationFrame(animFrameId);
+  clearInterval(spawnTimer);
+  if (canvas) canvas.removeEventListener("click", onCanvasClick);
+  window.removeEventListener("resize", resizeCanvas);
+  bubbles = [];
+  goTo("home");
+}
+
+// Auto-start when page loads
+window.onload = startBubbleGame;
+
+</script>
+
+</body>
+</html>
